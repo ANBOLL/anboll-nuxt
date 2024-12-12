@@ -1,0 +1,23 @@
+@use "sass:map";
+
+/* stylelint-disable
+ */
+@each $key, $val in $site-breakpoints {
+	:export {
+		site-breakpoints-#{$key}: $val;
+	}
+}
+
+@each $name, $indent in $indents {
+	:export {
+		indents-margin-#{"" + $name}-top: margin-#{"" + $name}-top;
+
+		indents-padding-#{"" + $name}-top: padding-#{"" + $name}-top;
+	}
+
+	:export {
+		indents-margin-#{"" + $name}-bottom: margin-#{"" + $name}-bottom;
+
+		indents-padding-#{"" + $name}-bottom: padding-#{"" + $name}-bottom;
+	}
+}

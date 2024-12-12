@@ -1,0 +1,208 @@
+@use "sass:map";
+@use "sass:list";
+@use "sass:math";
+@use "sass:string";
+@use "sass:meta";
+@import "config";
+
+/// Задает контентные отступы исходя из конфига
+///
+/// @param {"left" | "right" | "all"} $side - направление растяжения
+@mixin content-container($side: "all") {
+	box-sizing: border-box;
+
+	$indent: $content-offset-over-min;
+
+	--indent-content: #{$indent};
+
+	@if ($side == "all" or $side == "left") {
+		padding-left: $indent;
+	}
+
+	@if ($side == "all" or $side == "right") {
+		padding-right: $indent;
+	}
+
+	@each $key, $val in $site-breakpoints {
+		@media (min-width: $val) {
+			$indent: map.get($content-offsets, $key);
+
+			--indent-content: #{$indent};
+
+			@if ($side == "all" or $side == "left") {
+				padding-left: $indent;
+			}
+
+			@if ($side == "all" or $side == "right") {
+				padding-right: $indent;
+			}
+		}
+	}
+}
+
+// Ограничивает кол-во строчек текста
+/* stylelint-disable property-no-vendor-prefix, value-no-vendor-prefix */
+@mixin limit-text-lines-count($line-count) {
+	-ms-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	-ms-line-clamp: $line-count;
+	-webkit-line-clamp: $line-count;
+	line-clamp: $line-count;
+	display: -webkit-box;
+	word-wrap: break-word;
+	-webkit-box-orient: vertical;
+}
+
+/// Задает брейкпоинт по ширине
+/// @param {breakpoints} $breakpoint - требуемый брейкпоинт из масива брейкпойнтов в конфиге
+/// @param {bool} $first-mobile - применять через min-width
+@mixin breakpoint($breakpoint, $first-mobile: true) {
+	$width: 0;
+	$known: map.keys($site-breakpoints);
+
+	@if (map.has-key($site-breakpoints, $breakpoint)) {
+		$width: #{map.get($site-breakpoints, $breakpoint)};
+	} @else if meta.type-of($breakpoint) == "number" {
+		$width: #{$breakpoint};
+	}
+
+	@if (0 == $width) {
+		@warn "Нет брейкпоинта #{"" + $breakpoint}. Доступные значения: #{$known}.";
+	} @else {
+		$conditions-block: "(min-width: #{$width})";
+
+		@if ($first-mobile == false) {
+			$conditions-block: "(max-width: #{calc($width - 1px)})";
+		}
+
+		@media #{$conditions-block} {
+			@content;
+		}
+	}
+}
+
+/// Миксин для сетки
+///
+/// @param {grid-template-value} $template-columns - размер столбцов через grid-template-columns
+/// @param {bool} $row-gap - ставить гап междустрочный
+@mixin grid-container($template-columns, $row-gap: true) {
+	display: grid;
+	grid-template-columns: $template-columns;
+	column-gap: $gutter-size-over-min;
+
+	--column-gap: #{$gutter-size-over-min};
+
+	@if ($row-gap) {
+		row-gap: $gutter-size-over-min;
+	}
+
+	@each $key, $val in $site-breakpoints {
+		@media (min-width: $val) {
+			column-gap: map.get($gutter-size, $key);
+
+			--column-gap: #{map.get($gutter-size, $key)};
+
+			@if ($row-gap) {
+				row-gap: map.get($gutter-size, $key);
+			}
+		}
+	}
+}
+
+/// Миксин для сетки 12 колонок на десктопе
+///
+/// @param {bool} $row-gap - ставить гап междустрочный
+@mixin grid-container12($row-gap: true) {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	column-gap: $gutter-size-over-min;
+
+	--column-gap: #{$gutter-size-over-min};
+
+	@include breakpoint("tablet") {
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	@include breakpoint("desktop") {
+		grid-template-columns: repeat(12, 1fr);
+	}
+
+	@if ($row-gap) {
+		row-gap: $gutter-size-over-min;
+	}
+
+	@each $key, $val in $site-breakpoints {
+		@media (min-width: $val) {
+			column-gap: map.get($gutter-size, $key);
+
+			--column-gap: #{map.get($gutter-size, $key)};
+
+			@if ($row-gap) {
+				row-gap: map.get($gutter-size, $key);
+			}
+		}
+	}
+}
+
+@mixin font-face($name, $path, $weight: normal, $style: normal, $woff2: false) {
+	$src: if(
+		$woff2,
+		list.append(null, url($path + ".woff2") format(string.quote("woff2"))),
+		null
+	);
+	$src: list.append(
+		$src,
+		url($path + ".woff") format(string.quote("woff")),
+		comma
+	);
+
+	@font-face {
+		font-family: string.quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+		font-display: swap;
+	}
+}
+
+/// Миксин цветного отсутпа
+///
+/// @param {bool} $directionIsTop - выбор направления
+/// @param {bool} $isMargin - марджин или паддинг
+@mixin color-indent($name, $directionIsTop: true, $isMargin: true) {
+	$indent: map.get($indents, $name);
+	$direction-name: top;
+	$property-name: margin;
+
+	@if ($directionIsTop) {
+		$direction-name: top;
+	} @else {
+		$direction-name: bottom;
+	}
+
+	@if ($isMargin) {
+		$property-name: margin;
+	} @else {
+		$property-name: padding;
+	}
+
+	#{$property-name}-#{$direction-name}: map.get(
+		map.get($indent, "sizes"),
+		"mobile"
+	);
+
+	--#{$property-name}-#{$direction-name}margin-top-value: map.get(
+		map.get($indent, "sizes"),
+		"mobile"
+	);
+
+	@each $size, $value in map.get($indent, "sizes") {
+		@include breakpoint($size) {
+			#{$property-name}-#{$direction-name}: $value;
+
+			--#{$property-name}-#{$direction-name}-value: #{$value};
+		}
+	}
+}

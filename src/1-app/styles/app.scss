@@ -1,0 +1,385 @@
+@use "sass:map";
+@import "base";
+@import "normalize.css";
+@import "fonts";
+@include site-fonts;
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+header {
+	//
+}
+
+body {
+	min-width: 320px;
+	background-color: $body-background;
+	color: $body-text-color;
+	font-family: $body-font-family;
+}
+
+footer {
+	//
+}
+
+img {
+	max-width: 100%;
+}
+
+
+h1,
+.h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 30px;
+	line-height: 120%;
+	font-weight: 500;
+
+	@include breakpoint("tablet") {
+		font-size: 56px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 67px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 72px;
+	}
+}
+
+h2,
+.h2 {
+	margin: 0;
+	padding: 0;
+	font-size: 26px;
+	line-height: 120%;
+	font-weight: 600;
+
+	@include breakpoint("tablet") {
+		font-size: 36px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 40px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 56px;
+	}
+}
+
+h3,
+.h3 {
+	margin: 0;
+	padding: 0;
+	font-size: 28px;
+	line-height: 120%;
+	font-weight: 500;
+
+	@include breakpoint("tablet") {
+		font-size: 40px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 44px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 50px;
+	}
+}
+
+h4,
+.h4 {
+	margin: 0;
+	padding: 0;
+	font-size: 24px;
+	line-height: 120%;
+	font-weight: 600;
+
+	@include breakpoint("tablet") {
+		font-size: 28px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 30px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 40px;
+	}
+}
+
+.pre-title1 {
+	font-size: 28px;
+	line-height: 120%;
+	font-weight: 600;
+
+	@include breakpoint("tablet") {
+		font-size: 45px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 50px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 64px;
+	}
+}
+
+.pre-title2 {
+	font-size: 22px;
+	line-height: 120%;
+	font-weight: 500;
+
+	@include breakpoint("tablet") {
+		font-size: 26px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 29px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 36px;
+	}
+}
+
+.pre-title2-bold {
+	font-size: 22px;
+	line-height: 120%;
+	font-weight: 600;
+
+	@include breakpoint("tablet") {
+		font-size: 26px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 29px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 36px;
+	}
+}
+
+.pre-title3 {
+	font-size: 19px;
+	line-height: 120%;
+	font-weight: 500;
+
+	@include breakpoint("tablet") {
+		font-size: 22px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 25px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 32px;
+	}
+}
+
+.pre-title3-bold {
+	font-size: 20px;
+	line-height: 120%;
+	font-weight: 600;
+
+	@include breakpoint("tablet") {
+		font-size: 22px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 25px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 32px;
+	}
+}
+
+.pre-title4 {
+	font-size: 22px;
+	line-height: 120%;
+	font-weight: 600;
+
+	@include breakpoint("tablet") {
+		font-size: 28px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 31px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 40px;
+	}
+}
+
+.pre-title5 {
+	font-size: 18px;
+	line-height: 120%;
+	font-weight: 600;
+
+	@include breakpoint("tablet") {
+		font-size: 24px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 28px;
+	}
+
+	@include breakpoint("desktop") {
+		font-size: 30px;
+	}
+}
+
+.texts1 {
+	font-size: 20px;
+	line-height: 120%;
+	font-weight: 500;
+
+	@include breakpoint("tablet") {
+		font-size: 22px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 24px;
+	}
+}
+
+.texts2 {
+	font-size: 18px;
+	line-height: 120%;
+	font-weight: 500;
+
+	@include breakpoint("tablet") {
+		font-size: 20px;
+	}
+}
+
+.texts3 {
+	font-size: 14px;
+	line-height: 120%;
+	font-weight: 500;
+
+	@include breakpoint("tablet") {
+		font-size: 16px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 18px;
+	}
+}
+
+.menu-points {
+	font-size: 16px;
+	line-height: 120%;
+	font-weight: 500;
+
+	@include breakpoint("middle") {
+		font-size: 20px;
+	}
+}
+
+.texts4-bold {
+	font-size: 16px;
+	line-height: 120%;
+	font-weight: 600;
+
+	@include breakpoint("tablet") {
+		font-size: 22px;
+	}
+
+	@include breakpoint("middle") {
+		font-size: 24px;
+	}
+}
+
+p,
+div,
+a,
+li {
+	margin: 0;
+	padding: 0;
+}
+
+.l-content-container {
+	@include content-container;
+
+	width: 100%;
+	margin: 0 auto;
+}
+
+.l-content-container-left {
+	@include content-container("left");
+
+	width: 100%;
+}
+
+.l-content-container-right {
+	@include content-container("right");
+
+	width: 100%;
+}
+
+// Класс для контента из визуального редактора (HTML контент)
+.c-content {
+	h1,
+	.c-h1,
+	h2,
+	.c-h2,
+	h3,
+	.c-h3,
+	h4,
+	.c-h4,
+	p,
+	ul,
+	div {
+		margin-bottom: 30px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+iframe {
+	max-width: 1200px;
+	width: 100% !important;
+	height: auto !important;
+	aspect-ratio: 16/9;
+}
+
+// Отступы
+@each $name, $indent in $indents {
+	.margin-#{"" + $name} {
+		&-top {
+			@include color-indent($name, true, true);
+		}
+
+		&-bottom {
+			@include color-indent($name, false, true);
+		}
+	}
+
+	.padding-#{"" + $name} {
+		&-top {
+			@include color-indent($name, true, false);
+		}
+
+		&-bottom {
+			@include color-indent($name, false, false);
+		}
+	}
+}

@@ -1,0 +1,7 @@
+{
+    "useTabs": true, # указывает, следует ли использовать символы табуляции для отступов, или только пробелы.
+    "endOfLine": "auto", # использует автоматическое определение символа конца строки
+    "vueIndentScriptAndStyle": true,
+    "singleQuote": false,
+    "bracketSameLine": true,
+}

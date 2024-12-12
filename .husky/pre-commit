@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+. ./.env
+
+docker start nuxt-$PROJECT_NAME
+docker exec -t nuxt-$PROJECT_NAME bash -c "npx lint-staged"

@@ -1,0 +1,23 @@
+@mixin site-fonts() {
+	@include font-face(
+		$name: "Montserrat",
+		$path: "/fonts/Montserrat-SemiBold",
+		$weight: 600,
+		$style: normal,
+		$woff2: true
+	);
+	@include font-face(
+		$name: "Montserrat",
+		$path: "/fonts/Montserrat-Medium",
+		$weight: 500,
+		$style: normal,
+		$woff2: true
+	);
+	@include font-face(
+		$name: "Montserrat",
+		$path: "/fonts/Montserrat-Regular",
+		$weight: 400,
+		$style: normal,
+		$woff2: true
+	);
+}

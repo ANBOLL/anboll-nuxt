@@ -1,0 +1,21 @@
+networks:
+    project:
+
+services:
+    node:
+        build:
+            context: docker/node
+            dockerfile: Dockerfile
+            args:
+                USER_UID: ${USER_UID}
+                USER_GID: ${USER_GID}
+        working_dir: /www
+        stdin_open: true
+        tty: true
+        container_name: nuxt-${PROJECT_NAME}
+        volumes:
+            - ./:/www
+        ports:
+            - "${NODE_PORT}:2002"
+        networks:
+            - project

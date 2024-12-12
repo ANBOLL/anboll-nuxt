@@ -1,0 +1,6 @@
+{
+	"*.{scss,vue,ts}": "prettier --write",
+	"*.{scss,vue}": "stylelint",
+	"*.{vue,ts}": "eslint",
+	"src/*": "steiger"
+}

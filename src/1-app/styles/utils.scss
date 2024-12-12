@@ -1,0 +1,26 @@
+@use "sass:math";
+@use "sass:string";
+@use "sass:meta";
+
+/// Добавляет числу значение (Напрмер px) и возвращает его
+/// @param {int} $val - числовое значение
+/// @param {string} $unit - строковое значение
+/// @return {$val + $unit} - значение
+@function add-unit($val, $unit) {
+	@if (meta.type-of($val) != "string") {
+		$val: #{$val};
+	}
+
+	@if (null == string.index($val, $unit)) {
+		$val: #{$val}#{$unit};
+	}
+
+	@return $val;
+}
+
+/// Чистит значение $num от единиц измерения
+///
+/// @param {number} $num - любое число в любых единицах измерения
+@function strip-unit($num) {
+	@return math.div($num, ($num * 0 + 1));
+}
